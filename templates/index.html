@@ -40,9 +40,22 @@ https://templatemo.com/tm-556-catalog-z
                 <li class="nav-item">
                     <a class="nav-link nav-link-1 active" aria-current="page" href="photos/photos">Photos</a>
                 </li>
+
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link nav-link-2" href="videos/videos">Videos</a>
+                    <a class="nav-link nav-link-2" href="#">Hello, {{user.username}}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" href="accounts/logout">Log Out</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" href="accounts/register">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-2" href="accounts/login">Sign In</a>
+                </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link nav-link-3" href="about/about">About</a>
                 </li>
@@ -66,233 +79,42 @@ https://templatemo.com/tm-556-catalog-z
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
             <h2 class="col-6 tm-text-primary">
-                Latest Photos
+                Latest Posts
             </h2>
             <div class="col-6 d-flex justify-content-end align-items-center">
                 <form action="" class="tm-text-primary">
-                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 200
+                    Page <input type="text" value="1" size="1" class="tm-input-paging tm-text-primary"> of 1
                 </form>
             </div>
         </div>
         <div class="row tm-mb-90 tm-gallery">
+
+            <!-- Pretty Photos -->
+        {% for photo in bihar_photos %}
         	<div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
                 <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-03.jpg' %}" alt="Image" class="img-fluid">
+                    <img src="{{photo.img.url}}" alt="Image" class="img-fluid">
                     <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Clocks</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
+                        <h2>{{photo.name}}</h2>
+                        {% if user.is_authenticated %}
+                        <a href="{{photo.pdf.url}}">View more</a>
+                        {% else %}
+                        <a href="#">View more</a>
+                        {% endif %}
                     </figcaption>                    
                 </figure>
                 <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">18 Oct 2020</span>
-                    <span>9,906 views</span>
+                    <span class="tm-text-gray-light">{{photo.kab}}</span>
+                    <span>{{photo.dekha}} views</span>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-04.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Plants</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">14 Oct 2020</span>
-                    <span>16,100 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-05.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Morning</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">12 Oct 2020</span>
-                    <span>12,460 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-06.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Pinky</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">10 Oct 2020</span>
-                    <span>11,402 views</span>
-                </div>
-            </div>
-            
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-01.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Hangers</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">24 Sep 2020</span>
-                    <span>16,008 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-02.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Perfumes</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">20 Sep 2020</span>
-                    <span>12,860 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-07.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Bus</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">16 Sep 2020</span>
-                    <span>10,900 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-08.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>New York</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">12 Sep 2020</span>
-                    <span>11,300 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-09.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Abstract</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">10 Sep 2020</span>
-                    <span>42,700 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-10.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Flowers</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">8 Sep 2020</span>
-                    <span>11,402 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-11.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Rosy</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">4 Sep 2020</span>
-                    <span>32,906 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-12.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Rocki</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">28 Aug 2020</span>
-                    <span>50,700 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-13.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Purple</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">22 Aug 2020</span>
-                    <span>107,510 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-14.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Sea</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">14 Aug 2020</span>
-                    <span>118,006 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-15.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Turtle</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">9 Aug 2020</span>
-                    <span>121,300 views</span>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
-                <figure class="effect-ming tm-video-item">
-                    <img src="{% static 'img/img-16.jpg' %}" alt="Image" class="img-fluid">
-                    <figcaption class="d-flex align-items-center justify-content-center">
-                        <h2>Peace</h2>
-                        <a href="{% static 'photo-detail.html' %}">View more</a>
-                    </figcaption>                    
-                </figure>
-                <div class="d-flex justify-content-between tm-text-gray">
-                    <span class="tm-text-gray-light">3 Aug 2020</span>
-                    <span>21,204 views</span>
-                </div>
-            </div>         
+         {% endfor %}  
         </div> <!-- row -->
         <div class="row tm-mb-90">
             <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
                 <div class="tm-paging d-flex">
                     <a href="javascript:void(0);" class="active tm-paging-link">1</a>
-                    <a href="javascript:void(0);" class="tm-paging-link">2</a>
-                    <a href="javascript:void(0);" class="tm-paging-link">3</a>
-                    <a href="javascript:void(0);" class="tm-paging-link">4</a>
                 </div>
                 <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
             </div>            
@@ -303,8 +125,8 @@ https://templatemo.com/tm-556-catalog-z
         <div class="container-fluid tm-container-small">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
-                    <h3 class="tm-text-primary mb-4 tm-footer-title">About Catalog-Z</h3>
-                    <p>Catalog-Z is free <a rel="sponsored" href="{% static 'https://v5.getbootstrap.com/' %}">Bootstrap 5</a> Alpha 2 HTML Template for video and photo websites. You can freely use this TemplateMo layout for a front-end integration with any kind of CMS website.</p>
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">About Oneway Bihar</h3>
+                    <p>We are a small group of travel enthusiasts residing in Bihar. Having explored the vast beauty and mystic locations of the state which would otherwise remain obscure from the eyes of travel enthusiasts both in state and outside, we aspire to bring to you the breathtaking beauty of this ancient land which has witnessed the birth and death countless empires and civilisations.</p>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
                     <h3 class="tm-text-primary mb-4 tm-footer-title">Our Links</h3>
@@ -328,7 +150,7 @@ https://templatemo.com/tm-556-catalog-z
             </div>
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-12 px-5 mb-3">
-                    Copyright 2020 Catalog-Z Company. All rights reserved.
+                    Copyright 2022 Oneway Bihar. All rights reserved.
                 </div>
                 <div class="col-lg-4 col-md-5 col-12 px-5 text-right">
                     Designed by <a href="https://templatemo.com" class="tm-text-gray" rel="sponsored" target="_parent">TemplateMo</a>
